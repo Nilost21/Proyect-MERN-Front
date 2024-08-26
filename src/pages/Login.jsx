@@ -2,11 +2,42 @@ const Login = () => {
   return (
     <>
       <div>
-        <h1 className="text-indigo-600 font-black text-8xl">
-          Log in and manage your <span className="text-white">Patients</span>
+        <h1 className="text-indigo-600 font-black text-6xl ">
+          Start session and manage your{' '}
+          <span className="text-white">Patients</span>
         </h1>
       </div>
-      <div>2</div>
+      <div>
+        <form>
+          <div className="my-5">
+            <label className="uppercase text-gray-600 block text-xl font-bold">
+              Email
+            </label>
+            <input
+              type="email"
+              placeholder="Registration Email"
+              className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
+            />
+          </div>
+
+          <div className="my-5">
+            <label className="uppercase text-gray-600 block text-xl font-bold">
+              Password
+            </label>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
+            />
+          </div>
+
+          <input
+            type="submit"
+            value="Start Session"
+            className="bg-indigo-700 w-full py-3 px-10 rounded-xl text-white uppercase font-bold mt-5 hover:cursor-pointer hover:bg-indigo-800 md:w-auto"
+          />
+        </form>
+      </div>
     </>
   );
 };

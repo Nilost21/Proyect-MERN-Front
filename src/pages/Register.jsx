@@ -1,30 +1,51 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Alert from '../components/Alert';
+import axios from 'axios';
 
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [alert, setAlert] = useState({ msg: '', error: false });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if ([name, password, email, repeatPassword].includes('')) {
-      console.log('There are empty fields');
+      setAlert({ msg: 'There are empty fields', error: true });
       return;
     }
 
-    if (password != repeatPassword) {
-      console.log('Passwords are different');
+    if (password !== repeatPassword) {
+      setAlert({ msg: 'Passwords are different', error: true });
       return;
     }
 
     if (password.length < 6) {
-      console.log('The password is short, add at least 6 characters');
+      setAlert({
+        msg: 'The password is short, add at least 6 characters',
+        error: true,
+      });
       return;
     }
+
+    setAlert({ msg: '', error: false });
+
+    //Create the user in the API
+
+    try {
+      const url = 'http://localhost:4000/api/veterinary';
+
+      const response = await axios.post(url, { name, email, password });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  const { msg } = alert;
 
   return (
     <>
@@ -36,6 +57,7 @@ const Register = () => {
       </div>
 
       <div className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white">
+        {msg && <Alert alert={alert} />}
         <form onSubmit={handleSubmit}>
           <div className="my-5">
             <label className="uppercase text-gray-600 block text-xl font-bold">

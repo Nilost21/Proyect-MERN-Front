@@ -7,6 +7,25 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if ([name, password, email, repeatPassword].includes('')) {
+      console.log('There are empty fields');
+      return;
+    }
+
+    if (password != repeatPassword) {
+      console.log('Passwords are different');
+      return;
+    }
+
+    if (password.length < 6) {
+      console.log('The password is short, add at least 6 characters');
+      return;
+    }
+  };
+
   return (
     <>
       <div>
@@ -17,7 +36,7 @@ const Register = () => {
       </div>
 
       <div className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="my-5">
             <label className="uppercase text-gray-600 block text-xl font-bold">
               Name

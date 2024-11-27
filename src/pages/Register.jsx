@@ -38,10 +38,10 @@ const Register = () => {
     try {
       const url = 'http://localhost:4000/api/veterinary';
 
-      const response = await axios.post(url, { name, email, password });
-      console.log(response.data);
+      await axios.post(url, { name, email, password });
+      setAlert({ msg: 'Successfully created,check your mail ', error: false });
     } catch (error) {
-      console.log(error);
+      setAlert({ msg: error.response.data.msg, error: true });
     }
   };
 
